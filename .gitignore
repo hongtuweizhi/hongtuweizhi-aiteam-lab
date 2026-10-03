@@ -32,3 +32,6 @@ agent-ds/models-store.json
 *.log
 probe-debug.log
 repos/
+
+# 实验原始产出——按约定不上传，只保留本地
+blind/submissions/
