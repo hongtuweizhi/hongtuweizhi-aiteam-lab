@@ -132,6 +132,162 @@
     "tokens": 1068,
     "run": 2
    }
+  ],
+  "16": [
+   {
+    "parse": true,
+    "correct": 16,
+    "total": 16,
+    "rate": 1.0,
+    "tokens": 1197,
+    "run": 0
+   },
+   {
+    "parse": true,
+    "correct": 16,
+    "total": 16,
+    "rate": 1.0,
+    "tokens": 1346,
+    "run": 1
+   },
+   {
+    "parse": true,
+    "correct": 16,
+    "total": 16,
+    "rate": 1.0,
+    "tokens": 1773,
+    "run": 2
+   }
+  ],
+  "20": [
+   {
+    "parse": true,
+    "correct": 20,
+    "total": 20,
+    "rate": 1.0,
+    "tokens": 2080,
+    "run": 0
+   },
+   {
+    "parse": true,
+    "correct": 20,
+    "total": 20,
+    "rate": 1.0,
+    "tokens": 1868,
+    "run": 1
+   },
+   {
+    "parse": true,
+    "correct": 20,
+    "total": 20,
+    "rate": 1.0,
+    "tokens": 2292,
+    "run": 2
+   }
+  ],
+  "24": [
+   {
+    "parse": true,
+    "correct": 24,
+    "total": 24,
+    "rate": 1.0,
+    "tokens": 2611,
+    "run": 0
+   },
+   {
+    "parse": true,
+    "correct": 24,
+    "total": 24,
+    "rate": 1.0,
+    "tokens": 2306,
+    "run": 1
+   },
+   {
+    "parse": true,
+    "correct": 24,
+    "total": 24,
+    "rate": 1.0,
+    "tokens": 2759,
+    "run": 2
+   }
+  ],
+  "28": [
+   {
+    "parse": true,
+    "correct": 28,
+    "total": 28,
+    "rate": 1.0,
+    "tokens": 2738,
+    "run": 0
+   },
+   {
+    "parse": true,
+    "correct": 28,
+    "total": 28,
+    "rate": 1.0,
+    "tokens": 1842,
+    "run": 1
+   },
+   {
+    "parse": true,
+    "correct": 28,
+    "total": 28,
+    "rate": 1.0,
+    "tokens": 2713,
+    "run": 2
+   }
+  ],
+  "32": [
+   {
+    "parse": true,
+    "correct": 32,
+    "total": 32,
+    "rate": 1.0,
+    "tokens": 3083,
+    "run": 0
+   },
+   {
+    "parse": true,
+    "correct": 32,
+    "total": 32,
+    "rate": 1.0,
+    "tokens": 3735,
+    "run": 1
+   },
+   {
+    "parse": true,
+    "correct": 32,
+    "total": 32,
+    "rate": 1.0,
+    "tokens": 3662,
+    "run": 2
+   }
+  ],
+  "40": [
+   {
+    "parse": true,
+    "correct": 40,
+    "total": 40,
+    "rate": 1.0,
+    "tokens": 4298,
+    "run": 0
+   },
+   {
+    "parse": true,
+    "correct": 40,
+    "total": 40,
+    "rate": 1.0,
+    "tokens": 3899,
+    "run": 1
+   },
+   {
+    "parse": true,
+    "correct": 40,
+    "total": 40,
+    "rate": 1.0,
+    "tokens": 3792,
+    "run": 2
+   }
   ]
  }
 }
