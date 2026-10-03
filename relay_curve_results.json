@@ -1,7 +1,7 @@
 {
  "model": "deepseek-v4.1-flash",
  "endpoint": "https://opencode.ai/zen/go/v1",
- "runs": 3,
+ "runs": 2,
  "data": {
   "4": [
    {
@@ -287,6 +287,42 @@
     "rate": 1.0,
     "tokens": 3792,
     "run": 2
+   }
+  ],
+  "80": [
+   {
+    "parse": true,
+    "correct": 80,
+    "total": 80,
+    "rate": 1.0,
+    "tokens": 8717,
+    "run": 0
+   },
+   {
+    "parse": true,
+    "correct": 80,
+    "total": 80,
+    "rate": 1.0,
+    "tokens": 8349,
+    "run": 1
+   }
+  ],
+  "160": [
+   {
+    "parse": true,
+    "correct": 160,
+    "total": 160,
+    "rate": 1.0,
+    "tokens": 20938,
+    "run": 0
+   },
+   {
+    "parse": true,
+    "correct": 160,
+    "total": 160,
+    "rate": 1.0,
+    "tokens": 14382,
+    "run": 1
    }
   ]
  }

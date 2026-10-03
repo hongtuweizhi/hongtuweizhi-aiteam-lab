@@ -96,6 +96,46 @@
    "fixed_score": 5,
    "free_score": 6.5,
    "shared_bonus": 1
+  },
+  "T2": {
+   "axes": {
+    "spec_clarity": 2,
+    "decomposability": 2,
+    "verifiability": 2,
+    "exploration": 0,
+    "coupling": 1,
+    "data_dependency": 2
+   },
+   "fixed_score": 9.5,
+   "free_score": 4.5,
+   "shared_bonus": 0,
+   "predicted_winner": "fixed",
+   "judging": "objective",
+   "result": {
+    "winner": "free",
+    "evidence": "双口径：宽容分25/25打平(计算保真)，契约分0/25(格式自走己路)，成本1.7×。free胜(交付=按spec交货)"
+   },
+   "hit": false
+  },
+  "T5": {
+   "axes": {
+    "spec_clarity": 0,
+    "decomposability": 1,
+    "verifiability": 2,
+    "exploration": 2,
+    "coupling": 0,
+    "data_dependency": 1
+   },
+   "fixed_score": 5.5,
+   "free_score": 9.5,
+   "shared_bonus": 0,
+   "predicted_winner": "free",
+   "judging": "objective",
+   "result": {
+    "winner": "tie",
+    "evidence": "质量打平（双方三项全中：根因定位+修正值）；成本 free 5.5× 优势。预测的 free 质量优势未显现——带工具后 fixed 也能探索"
+   },
+   "hit": true
   }
  }
 }

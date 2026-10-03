@@ -124,8 +124,8 @@ Your response:${isTerminal ? CONTRACT + idVocab(spec.task) : ""}`;
       role: a.backstory,
       agentDir: spec.agentDir,
       cwd: spec.workDir,
-      // crew 配置里带工具的角色（如 Writer 的 write_str_to_txt）接 pi 的 write
-      tools: a.tools && a.tools.length ? ["write"] : [],
+      // crew 配置里带工具的角色按 spec.crewTools 映射（如 T2 需要 read/bash/write）
+      tools: a.tools && a.tools.length ? (spec.crewTools ?? ["write"]) : [],
     });
     const started = Date.now();
     const { text, usage: u } = await agent.prompt(prompt);

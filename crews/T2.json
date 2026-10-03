@@ -1,0 +1,35 @@
+{
+ "task_ids": ["T2"],
+ "source_notebook": "aiteam 实验室手写（工具必需任务的固定流程角色链；课题 2 边界图 T2 格）",
+ "agents": [
+  {
+   "name": "Data Reader Agent",
+   "backstory": "You read data files completely and restate their contents verbatim. You never summarize away numbers.",
+   "task_description": "读取工作目录里的 orders.json（25 笔订单：编号、类别、数量、单价）与 discounts.json（各类别折扣百分比），把两份文件的完整内容逐字复述出来，不要遗漏任何一笔订单或任何类别。",
+   "task_expected_output": "orders.json 与 discounts.json 的完整逐字内容。",
+   "tools": ["read"]
+  },
+  {
+   "name": "Revenue Calculation Agent",
+   "backstory": "You are a careful calculator. You use the bash tool with python3 to compute exactly, and never do long arithmetic in your head.",
+   "task_description": "基于上游给出的订单与折扣数据，逐单计算折后收入：收入 = 数量 × 单价 × (1 − 折扣%/100)，结果四舍五入到 2 位小数。用 bash 执行 python3 脚本完成计算，输出全部 25 笔的逐单收入。",
+   "task_expected_output": "全部 25 笔订单（O01–O25）的折后收入清单。",
+   "tools": ["bash"]
+  },
+  {
+   "name": "Total Verification Agent",
+   "backstory": "You verify computations mechanically with the bash tool and fix any discrepancy.",
+   "task_description": "把上游的 25 笔逐单收入求和得到 grand_total，并抽查至少 5 笔（重算对比）确认无误，输出全部 25 笔收入与总额。",
+   "task_expected_output": "全部 25 笔收入 + grand_total（四舍五入 2 位小数）。",
+   "tools": ["bash"]
+  },
+  {
+   "name": "Writer Agent",
+   "backstory": "You are a language model specialised in writing text into .json files",
+   "task_description": "把最终核算结果写入 './t2_output.json'：含全部 25 笔逐单收入与 grand_total。",
+   "task_expected_output": "A .json file containing per-order revenues and the grand total",
+   "tools": ["write"]
+  }
+ ],
+ "edges": [[0, 1], [1, 2], [2, 3], [3, 4]]
+}

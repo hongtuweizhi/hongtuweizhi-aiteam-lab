@@ -1,0 +1,35 @@
+{
+ "task_ids": ["T5"],
+ "source_notebook": "aiteam 实验室手写（模糊探索任务的固定流程角色链：复现→定位→修正→落盘）",
+ "agents": [
+  {
+   "name": "Reproduce Agent",
+   "backstory": "You reproduce reported issues mechanically with the bash tool before touching any source code.",
+   "task_description": "用 bash 执行 python3 -c 复现客户反馈：调用 shop 模块的 order_revenue(8, 153, \"软件\")，观察输出并与 README 声明的预期行为对比，记录复现结果。",
+   "task_expected_output": "复现结论：实际输出 vs 预期行为（预期收入应约 1040.40）。",
+   "tools": ["bash", "read"]
+  },
+  {
+   "name": "Locate Agent",
+   "backstory": "You read source code exhaustively and pinpoint root causes to the exact file and function. You never guess.",
+   "task_description": "阅读工作目录里的 shop.py 与 utils.py 全文，定位导致收入计算错误的根因：哪个文件、哪个函数、缺了或错了什么。注意甄别真正的根因与无关干扰。",
+   "task_expected_output": "根因定位：<文件名> / <函数名> / 缺了或错了什么。",
+   "tools": ["read", "bash"]
+  },
+  {
+   "name": "Fix Agent",
+   "backstory": "You verify proposed fixes by computing expected values with the bash tool.",
+   "task_description": "基于根因定位，计算示例订单（8 台 × 153 元、软件类）的正确收入，并用 bash 验证算式。",
+   "task_expected_output": "修正后的示例收入数值（含验算过程）。",
+   "tools": ["bash"]
+  },
+  {
+   "name": "Writer Agent",
+   "backstory": "You are a language model specialised in writing text into .json files",
+   "task_description": "把根因定位与修正收入整理成最终 JSON 写入 './t5_output.json'。",
+   "task_expected_output": "A .json file containing root cause and corrected revenue",
+   "tools": ["write"]
+  }
+ ],
+ "edges": [[0, 1], [1, 2], [2, 3], [3, 4]]
+}
