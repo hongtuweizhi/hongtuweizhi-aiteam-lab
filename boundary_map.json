@@ -1,0 +1,101 @@
+{
+ "entries": {
+  "T3": {
+   "axes": {
+    "spec_clarity": 2,
+    "decomposability": 2,
+    "verifiability": 2,
+    "exploration": 0,
+    "coupling": 1,
+    "data_dependency": 2
+   },
+   "predicted_winner": "fixed",
+   "judging": "objective",
+   "result": {
+    "winner": "free",
+    "evidence": "客观判分：free makespan 9.0=精确最优(ratio 1.0)；fixed 工序身份丢失(改名1-9号)且 makespan 20=2.2x最优却自称最优"
+   },
+   "fixed_score": 12,
+   "free_score": 1,
+   "shared_bonus": 0,
+   "hit": false
+  },
+  "T4": {
+   "axes": {
+    "spec_clarity": 2,
+    "decomposability": 2,
+    "verifiability": 1,
+    "exploration": 0,
+    "coupling": 2,
+    "data_dependency": 1
+   },
+   "predicted_winner": "fixed",
+   "judging": "machine",
+   "result": {
+    "winner": "free",
+    "evidence": "探针实测：fixed 终稿约束存活 1/5（第一跳丢 C1/C4/C5，第二跳丢 C2/C3），free 5/5；机械分两边虚高 100%"
+   },
+   "fixed_score": 9.5,
+   "free_score": 2.5,
+   "shared_bonus": 1,
+   "hit": false
+  },
+  "P4": {
+   "axes": {
+    "spec_clarity": 1,
+    "decomposability": 1,
+    "verifiability": 1,
+    "exploration": 1,
+    "coupling": 1,
+    "data_dependency": 0
+   },
+   "predicted_winner": "free",
+   "judging": "machine",
+   "result": {
+    "winner": "free",
+    "evidence": "sweep: 双100%但盲评 F2 vs L7，free 省 6.5x"
+   },
+   "fixed_score": 5,
+   "free_score": 5.5,
+   "shared_bonus": 0
+  },
+  "P3": {
+   "axes": {
+    "spec_clarity": 1,
+    "decomposability": 1,
+    "verifiability": 0,
+    "exploration": 1,
+    "coupling": 1,
+    "data_dependency": 0
+   },
+   "predicted_winner": "free",
+   "judging": "blind-rubric",
+   "result": {
+    "winner": "free",
+    "evidence": "fixed 场景漂移（K-04/P-1006 无关实体），盲评 1 vs 9"
+   },
+   "fixed_score": 3.5,
+   "free_score": 6,
+   "shared_bonus": 0
+  },
+  "P10": {
+   "axes": {
+    "spec_clarity": 1,
+    "decomposability": 1,
+    "verifiability": 1,
+    "exploration": 1,
+    "coupling": 2,
+    "data_dependency": 0
+   },
+   "predicted_winner": "free",
+   "judging": "machine",
+   "result": {
+    "winner": "free",
+    "evidence": "sweep: 75% vs 100%，free 自发开 3 分身"
+   },
+   "fixed_score": 5,
+   "free_score": 6.5,
+   "shared_bonus": 1
+  }
+ }
+}

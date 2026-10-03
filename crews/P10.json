@@ -1,0 +1,101 @@
+{
+ "notebook": "multiagent-P10-SupplyChain.ipynb",
+ "dag_ok": true,
+ "agents": [
+  {
+   "name": "Supplier & Component Setup Agent",
+   "backstory": "You define suppliers, components, facilities, and their capabilities in the global supply chain.",
+   "task_description": "Set up supply chain structure: suppliers (supplier1: Asia, capacity 1000, lead time 30 days; supplier2: Europe, capacity 800, lead time 45 days), components (GPU chips, memory, cooling, power supply, PCB), and facilities (assembly: USA, capacity 500; testing: USA, capacity 300).",
+   "task_expected_output": "Structured supply chain data: 1) Suppliers with locations, capacities, and lead times. 2) Components required. 3) Facilities with capacities and locations. 4) Budget limit: $1,000,000.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 0
+  },
+  {
+   "name": "Procurement Planning Agent",
+   "backstory": "You plan component procurement from suppliers to meet delivery deadlines while minimizing costs.",
+   "task_description": "Create procurement plan: order components from suppliers to meet deadlines (GPU chips: 30 days, memory: 45 days, cooling: 60 days) while staying within budget and respecting supplier capacities.",
+   "task_expected_output": "Procurement plan with component orders, supplier assignments, order quantities, and delivery schedules.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 1
+  },
+  {
+   "name": "Infrastructure Planning Agent",
+   "backstory": "You plan infrastructure setup considering dependencies between facilities and processes.",
+   "task_description": "Plan infrastructure setup respecting dependencies: power supply before assembly, testing before packaging. Schedule facility operations within capacity constraints.",
+   "task_expected_output": "Infrastructure plan with facility schedules, dependency sequences, and capacity utilization.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 2
+  },
+  {
+   "name": "Cost Optimization Agent",
+   "backstory": "You optimize total project costs while meeting all constraints and deadlines.",
+   "task_description": "Optimize procurement and operations to minimize total cost while meeting delivery deadlines, supplier capacities, and budget limit of $1,000,000.",
+   "task_expected_output": "Cost-optimized plan with total cost breakdown, supplier selections, and cost-risk tradeoffs.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 3
+  },
+  {
+   "name": "Risk Assessment Agent",
+   "backstory": "You assess supply chain risks including shortages, machine breakdowns, and delays.",
+   "task_description": "Assess risks: potential GPU chip shortages (40% reduction), machine breakdowns at assembly facilities (7 days), and develop mitigation strategies.",
+   "task_expected_output": "Risk assessment with identified risks, impact analysis, and mitigation strategies including alternative suppliers and backup plans.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 4
+  },
+  {
+   "name": "Inventory Optimization Agent",
+   "backstory": "You optimize inventory levels to balance costs and ensure supply continuity.",
+   "task_description": "Optimize inventory levels for each component to minimize holding costs while ensuring continuous supply and meeting production schedules.",
+   "task_expected_output": "Optimized inventory plan with reorder points, safety stock levels, and inventory cost analysis.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 5
+  },
+  {
+   "name": "Writer Agent",
+   "backstory": "You are a language model specialised in writing text into .json files",
+   "task_description": "Write the json response into './p10_output.json'",
+   "task_expected_output": "A .json file containing the given string",
+   "tools": [
+    "write_str_to_txt"
+   ],
+   "llm": "gpt-4o",
+   "index": 6
+  }
+ ],
+ "edges": [
+  [
+   0,
+   1
+  ],
+  [
+   1,
+   2
+  ],
+  [
+   2,
+   3
+  ],
+  [
+   3,
+   4
+  ],
+  [
+   4,
+   5
+  ],
+  [
+   5,
+   6
+  ]
+ ],
+ "task_ids": [
+  "P10"
+ ],
+ "source_notebook": "multiagent-P10-SupplyChain.ipynb"
+}

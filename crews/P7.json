@@ -1,0 +1,101 @@
+{
+ "notebook": "multiagent-P7-DisasterRelief.ipynb",
+ "dag_ok": true,
+ "agents": [
+  {
+   "name": "Situation Assessment Agent",
+   "backstory": "You assess disaster situations, identify affected regions, severity levels, and resource needs.",
+   "task_description": "Evaluate disaster impact: identify regions (region1: critical, needs medical/food; region2: urgent, needs water/shelter), assess severity, and determine resource requirements.",
+   "task_expected_output": "Structured assessment: 1) Affected regions with severity levels. 2) Resource needs per region (medical supplies, food, water, shelter). 3) Emergency response deadlines (critical: 2h, urgent: 6h, normal: 24h).",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 0
+  },
+  {
+   "name": "Resource Inventory Agent",
+   "backstory": "You manage available relief resources including supplies, personnel, and vehicles.",
+   "task_description": "Inventory available resources: medical supplies (1000 units), food (5000 units), water (2000 units), personnel (20 doctors, 50 nurses, 30 logistics), and vehicles (helicopters, trucks).",
+   "task_expected_output": "Complete resource inventory with quantities, locations, and capabilities of all available relief resources.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 1
+  },
+  {
+   "name": "Allocation Planning Agent",
+   "backstory": "You plan optimal allocation of resources to affected regions to maximize aid delivery and minimize response time.",
+   "task_description": "Create allocation plan distributing resources to regions based on needs, severity, and deadlines, optimizing for maximum aid delivery and minimum response time.",
+   "task_expected_output": "Resource allocation plan: assignments of supplies, personnel, and vehicles to each region with delivery schedules.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 2
+  },
+  {
+   "name": "Personnel Deployment Agent",
+   "backstory": "You deploy personnel teams to regions based on their skills and regional needs.",
+   "task_description": "Deploy personnel teams (medical teams, logistics teams) to regions matching skills with needs, ensuring timely arrival within deadlines.",
+   "task_expected_output": "Personnel deployment schedule with team assignments, routes, and arrival times for each region.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 3
+  },
+  {
+   "name": "Vehicle Routing Agent",
+   "backstory": "You plan vehicle routes for delivering supplies and personnel to affected regions.",
+   "task_description": "Plan routes for vehicles (helicopters for fast delivery, trucks for bulk transport) to deliver resources to regions, considering distance, urgency, and vehicle capabilities.",
+   "task_expected_output": "Vehicle routing plan with delivery schedules, routes, and estimated arrival times for each vehicle.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 4
+  },
+  {
+   "name": "Contingency Planning Agent",
+   "backstory": "You develop contingency plans for weather events, resource shortages, and other disruptions.",
+   "task_description": "Create contingency plans for potential disruptions: weather events blocking transport, resource shortages, and alternative allocation strategies.",
+   "task_expected_output": "Contingency plans with alternative routes, backup resource sources, and adaptive strategies for disruptions.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 5
+  },
+  {
+   "name": "Writer Agent",
+   "backstory": "You are a language model specialised in writing text into .json files",
+   "task_description": "Write the json response into './p7_output.json'",
+   "task_expected_output": "A .json file containing the given string",
+   "tools": [
+    "write_str_to_txt"
+   ],
+   "llm": "gpt-4o",
+   "index": 6
+  }
+ ],
+ "edges": [
+  [
+   0,
+   1
+  ],
+  [
+   1,
+   2
+  ],
+  [
+   2,
+   3
+  ],
+  [
+   3,
+   4
+  ],
+  [
+   4,
+   5
+  ],
+  [
+   5,
+   6
+  ]
+ ],
+ "task_ids": [
+  "P7"
+ ],
+ "source_notebook": "multiagent-P7-DisasterRelief.ipynb"
+}

@@ -1,0 +1,86 @@
+{
+ "notebook": "multiagent-P3andP4-UrbanRideSharing.ipynb",
+ "dag_ok": true,
+ "agents": [
+  {
+   "name": "Writer Agent",
+   "backstory": "You are a language model specialised in writing text into .txt files",
+   "task_description": "Write the string 'This is a Tool Agent' into './tool_agent_example.txt'",
+   "task_expected_output": "A .txt file containing the given string",
+   "tools": [
+    "write_str_to_txt"
+   ],
+   "llm": "gpt-4o",
+   "index": 0
+  },
+  {
+   "name": "Data Collection Agent",
+   "backstory": "You collect basic traffic data, road closure updates, and estimated travel times between locations in San Francisco.",
+   "task_description": "Retrieve traffic conditions, road closures, and estimated travel durations for all routes involved in passenger transport.",
+   "task_expected_output": "Structured travel time data, including 1) CityMap:Agraph𝐺=(𝑉,𝐸) where locations𝑉 and roads𝐸 have distances and travel times. 2) Ride Requests: A set of requests 𝑅, each defined by: – PassengerID,pickup/drop-offlocations,timewindows. 3) Vehicles: A set of available vehicles 𝐾, each with: – Location,battery/fuellevel,passenger, capacity,and speed.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 1
+  },
+  {
+   "name": "Route Planning Agent",
+   "backstory": "You determine optimal routes for vehicles to minimize total travel time while ensuring all passengers arrive on time.",
+   "task_description": "Use traffic data and constraints to compute the best routes for each vehicle, ensuring on-time airport arrivals.",
+   "task_expected_output": "Optimized vehicle assignments and travel routes.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 2
+  },
+  {
+   "name": "Vehicle Dispatch Agent",
+   "backstory": "You assign passengers to vehicles and ensure each vehicle follows the optimal planned route.",
+   "task_description": "Assign passengers to vehicles based on capacity constraints and route efficiency.",
+   "task_expected_output": "Vehicle assignment list and dispatch schedule.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 3
+  },
+  {
+   "name": "Monitoring & Alert Agent",
+   "backstory": "You track vehicle movements and notify if there are risks of missing passenger deadlines in San Francisco.",
+   "task_description": "Send alerts for potential delays and recommend contingency plans.",
+   "task_expected_output": "Timely notifications for alternative route adjustments or emergency responses.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 4
+  },
+  {
+   "name": "Writer Agent",
+   "backstory": "You are a language model specialised in writing text into .json files",
+   "task_description": "Write the json response into './p3_output.json'",
+   "task_expected_output": "A .json file containing the given string",
+   "tools": [
+    "write_str_to_txt"
+   ],
+   "llm": "gpt-4o",
+   "index": 5
+  }
+ ],
+ "edges": [
+  [
+   1,
+   2
+  ],
+  [
+   2,
+   3
+  ],
+  [
+   3,
+   4
+  ],
+  [
+   4,
+   5
+  ]
+ ],
+ "task_ids": [
+  "P4"
+ ],
+ "source_notebook": "multiagent-P3andP4-UrbanRideSharing.ipynb"
+}

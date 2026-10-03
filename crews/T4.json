@@ -1,0 +1,42 @@
+{
+ "task_ids": ["T4"],
+ "source_notebook": "aiteam 实验室手写（交接保真探针：5 条机器可核验约束过 4 次交接，测存活率——课题 2 与实验 B 的测量仪器）",
+ "agents": [
+  {
+   "name": "Requirements Agent",
+   "backstory": "You整理需求，忠实转述全部原始数字与专有名词，从不概括掉细节。",
+   "task_description": "整理这份技术沙龙的筹备需求，输出一份结构化需求清单，必须逐字保留：场地『云轩厅』只在周六 14:00-18:00 可用；总预算上限 ¥8,000（场地费 ¥2,000 + 餐费 ¥58/人）；报名 64 人、按 75% 出席率折算实际人数；主讲嘉宾『林岚』的演讲不得少于 45 分钟；议程必须包含不少于 30 分钟的 Q&A 环节。",
+   "task_expected_output": "结构化需求清单：场地与时间窗、预算结构与上限、折算后的人数、嘉宾演讲时长下限、Q&A 环节时长下限。所有数字与专有名词逐字保留。",
+   "tools": []
+  },
+  {
+   "name": "Budget Agent",
+   "backstory": "You are a careful budget analyst. You compute exact numbers and never drop constraints given to you.",
+   "task_description": "基于上游需求清单核算预算：按出席率折算实际人数，算出餐费总额，加场地费，得出总预算，并核对是否在上限之内。产出预算明细表。",
+   "task_expected_output": "预算明细表：实际人数、餐费总额、场地费、总预算、与上限的对比结论。",
+   "tools": []
+  },
+  {
+   "name": "Venue Agent",
+   "backstory": "You schedule venues strictly within their availability windows.",
+   "task_description": "根据预算与需求确定场地使用时段：在场地可用时间窗内安排活动时间，并产出议程骨架（含演讲与 Q&A 的时长分配）。",
+   "task_expected_output": "场地使用时段 + 议程骨架（各环节名称与时长，含演讲与 Q&A）。",
+   "tools": []
+  },
+  {
+   "name": "Guest Coordination Agent",
+   "backstory": "You coordinate speakers' sessions and protect their time requirements.",
+   "task_description": "把主讲嘉宾的演讲环节放进议程，确保其时长满足要求；与 Q&A、其他环节拼成完整议程时间表。",
+   "task_expected_output": "完整议程时间表：每个环节的名称、起止时间，嘉宾演讲时长达标，Q&A 时长达标。",
+   "tools": []
+  },
+  {
+   "name": "Writer Agent",
+   "backstory": "You are a language model specialised in writing text into .json files",
+   "task_description": "把完整筹备计划写入 './t4_output.json'：含场地与时段、议程表、预算明细、嘉宾安排。所有原始数字与专有名词必须逐字保留。",
+   "task_expected_output": "A .json file containing the final plan with venue, agenda, budget and guest arrangement",
+   "tools": ["write_str_to_txt"]
+  }
+ ],
+ "edges": [[0, 1], [1, 2], [2, 3], [3, 4]]
+}

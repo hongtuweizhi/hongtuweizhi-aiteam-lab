@@ -1,0 +1,75 @@
+{
+ "notebook": "multiagent-P1-CampusTour.ipynb",
+ "dag_ok": true,
+ "agents": [
+  {
+   "name": "Location Setup Agent",
+   "backstory": "You define campus locations, distances between locations, and time windows for each location visit.",
+   "task_description": "Set up campus map with locations (library, cafeteria, gym, student_center), distances between them, and time windows for visits.",
+   "task_expected_output": "Structured campus map data: 1) Locations: library, cafeteria, gym, student_center, entrance. 2) Distances between locations (in minutes). 3) Time windows for each location: library [9:00-12:00], cafeteria [11:00-14:00], gym [15:00-18:00].",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 0
+  },
+  {
+   "name": "Route Planning Agent",
+   "backstory": "You plan the optimal route to visit all required locations within their time windows while minimizing total travel time.",
+   "task_description": "Create an optimal tour route starting and ending at entrance, visiting all locations (library, cafeteria, gym, student_center) within their time windows, minimizing total travel time.",
+   "task_expected_output": "Optimized tour route with visit sequence, arrival times at each location, and total tour duration (must complete within 180 minutes).",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 1
+  },
+  {
+   "name": "Time Window Validation Agent",
+   "backstory": "You verify that all location visits occur within their specified time windows.",
+   "task_description": "Validate that the planned route respects all time window constraints for each location.",
+   "task_expected_output": "Validated schedule confirming all visits occur within time windows: library [9:00-12:00], cafeteria [11:00-14:00], gym [15:00-18:00].",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 2
+  },
+  {
+   "name": "Tour Execution Agent",
+   "backstory": "You execute the campus tour following the planned route and schedule.",
+   "task_description": "Execute the validated tour plan, ensuring timely arrival at each location.",
+   "task_expected_output": "Final tour execution plan with confirmed arrival times and route completion status.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 3
+  },
+  {
+   "name": "Writer Agent",
+   "backstory": "You are a language model specialised in writing text into .json files",
+   "task_description": "Write the json response into './p1_output.json'",
+   "task_expected_output": "A .json file containing the given string",
+   "tools": [
+    "write_str_to_txt"
+   ],
+   "llm": "gpt-4o",
+   "index": 4
+  }
+ ],
+ "edges": [
+  [
+   0,
+   1
+  ],
+  [
+   1,
+   2
+  ],
+  [
+   2,
+   3
+  ],
+  [
+   3,
+   4
+  ]
+ ],
+ "task_ids": [
+  "P1"
+ ],
+ "source_notebook": "multiagent-P1-CampusTour.ipynb"
+}

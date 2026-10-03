@@ -1,0 +1,45 @@
+【任务描述】Planning and scheduling to synchronize travel and meal preparation among family members with airport pickups and kitchen dependencies
+【目标】coordinate_travel（Coordinate all family travel）；prepare_meal（Complete meal preparation on time）；minimize_conflicts（Minimize kitchen and resource conflicts）
+【约束】dinner_deadline（deadline）：{"deadline": "18:00"}；kitchen_capacity（capacity）：{"max_cooks": 3}；cooking_dependencies（dependency）：{"dependencies": [["turkey", "gravy"], ["potatoes", "mashed_potatoes"]]}；airport_pickups（resource）：{"pickup_times": {"flight1": "14:00", "flight2": "15:30"}}
+【资源】{"vehicles": [{"id": "car1", "capacity": 4, "location": "home"}, {"id": "car2", "capacity": 4, "location": "airport"}], "cooking_tasks": ["turkey", "stuffing", "gravy", "potatoes", "vegetables", "dessert"], "family_members": [{"id": "mom", "skills": ["turkey", "gravy"], "arrival": "home"}, {"id": "dad", "skills": ["potatoes"], "arrival": "airport"}]}
+
+========================================
+
+【匿名产出】
+## Analysis
+
+**Travel coordination**
+- `car2` is already at the airport → handles the early pickup: picks up **flight1 (14:00)** and returns home by ~14:45.
+- `car1` departs home at 14:45, reaches the airport for **flight2 (15:30)**, and returns home by ~16:15.
+- Both pickups covered; both vehicles used concurrently, no vehicle conflicts.
+
+**Kitchen planning (deadline 18:00, max 3 cooks)**
+- Turkey is the long pole and gates gravy → start it early.
+- Potatoes gate mashed_potatoes → run them mid-afternoon.
+- Mom uses her skilled tasks (turkey → gravy); dad uses his (potatoes → mashed_potatoes).
+- Remaining side tasks (stuffing, vegetables, dessert) slotted later, keeping concurrency ≤ 3.
+
+**Conflict check**
+- Max simultaneous cooks = 3 (16:30–17:00: gravy + vegetables + dessert) → within `kitchen_capacity`.
+- Dependencies kept in order: turkey finishes 16:30 before gravy starts; potatoes finish 15:30 before mashed_potatoes start.
+- Meal plated and served 17:30–18:00 → meets the 18:00 deadline.
+
+```json
+{
+  "achieved_goals": ["coordinate_travel", "prepare_meal", "minimize_conflicts"],
+  "constraints_satisfied": ["dinner_deadline", "kitchen_capacity", "cooking_dependencies", "airport_pickups"],
+  "schedule": [
+    {"task": "turkey", "start": 13.0, "end": 16.5},
+    {"task": "car2 pick up flight1 (14:00)", "start": 14.0, "end": 14.75},
+    {"task": "car1 depart home for flight2", "start": 14.75, "end": 15.0},
+    {"task": "potatoes", "start": 15.0, "end": 15.5},
+    {"task": "car1 pick up flight2 (15:30)", "start": 15.5, "end": 16.25},
+    {"task": "mashed_potatoes", "start": 15.5, "end": 16.0},
+    {"task": "stuffing", "start": 16.0, "end": 16.5},
+    {"task": "gravy", "start": 16.5, "end": 17.0},
+    {"task": "vegetables", "start": 16.5, "end": 17.0},
+    {"task": "dessert", "start": 16.5, "end": 17.25},
+    {"task": "serve dinner", "start": 17.5, "end": 18.0}
+  ]
+}
+```

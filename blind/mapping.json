@@ -1,0 +1,102 @@
+{
+ "卷001": {
+  "task": "P2",
+  "condition": "free",
+  "source_run": "P2-free-1790929168845"
+ },
+ "卷002": {
+  "task": "P8",
+  "condition": "free",
+  "source_run": "P8-free-1790929277600"
+ },
+ "卷003": {
+  "task": "P1",
+  "condition": "fixed",
+  "source_run": "P1-fixed-1790924393445"
+ },
+ "卷004": {
+  "task": "P2",
+  "condition": "fixed",
+  "source_run": "P2-fixed-1790928046511"
+ },
+ "卷005": {
+  "task": "P4",
+  "condition": "fixed",
+  "source_run": "P4-fixed-1790928229688"
+ },
+ "卷006": {
+  "task": "P5",
+  "condition": "free",
+  "source_run": "P5-free-1790929215663"
+ },
+ "卷007": {
+  "task": "P5",
+  "condition": "fixed",
+  "source_run": "P5-fixed-1790928428880"
+ },
+ "卷008": {
+  "task": "P8",
+  "condition": "fixed",
+  "source_run": "P8-fixed-1790928812152"
+ },
+ "卷009": {
+  "task": "P10",
+  "condition": "fixed",
+  "source_run": "P10-fixed-1790928958489"
+ },
+ "卷010": {
+  "task": "P7",
+  "condition": "free",
+  "source_run": "P7-free-1790929254264"
+ },
+ "卷011": {
+  "task": "P4",
+  "condition": "free",
+  "source_run": "P4-free-1790929198208"
+ },
+ "卷012": {
+  "task": "P6",
+  "condition": "fixed",
+  "source_run": "P6-fixed-1790928515439"
+ },
+ "卷013": {
+  "task": "P1",
+  "condition": "free",
+  "source_run": "P1-free-1790929138389"
+ },
+ "卷014": {
+  "task": "P10",
+  "condition": "free",
+  "source_run": "P10-free-1790929326360"
+ },
+ "卷015": {
+  "task": "P9",
+  "condition": "fixed",
+  "source_run": "P9-fixed-1790928864625"
+ },
+ "卷016": {
+  "task": "P7",
+  "condition": "fixed",
+  "source_run": "P7-fixed-1790928585501"
+ },
+ "卷017": {
+  "task": "P6",
+  "condition": "free",
+  "source_run": "P6-free-1790929237256"
+ },
+ "卷018": {
+  "task": "P9",
+  "condition": "free",
+  "source_run": "P9-free-1790929308816"
+ },
+ "卷019": {
+  "task": "P3",
+  "condition": "fixed",
+  "source_run": "P3-fixed-1790928079949"
+ },
+ "卷020": {
+  "task": "P3",
+  "condition": "free",
+  "source_run": "P3-free-1790929181780"
+ }
+}

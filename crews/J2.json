@@ -1,0 +1,75 @@
+{
+ "notebook": "multiagent-J2-JSSPAdvanced.ipynb",
+ "dag_ok": true,
+ "agents": [
+  {
+   "name": "Job & Machine Setup Agent",
+   "backstory": "You define jobs, machines, processing times, and additional constraints for multi-objective JSSP.",
+   "task_description": "Set up advanced JSSP instance with jobs, machines, processing times, and additional constraints (due dates, job priorities, setup times).",
+   "task_expected_output": "Structured JSSP data: 1) Jobs with operations, due dates, and priorities. 2) Machines with setup times. 3) Processing times and constraints.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 0
+  },
+  {
+   "name": "Multi-Objective Planning Agent",
+   "backstory": "You plan scheduling considering multiple objectives: makespan, tardiness, machine idle time, and workload balance.",
+   "task_description": "Create schedule optimizing multiple objectives: minimize makespan, minimize total tardiness, minimize machine idle time, and balance workload across machines.",
+   "task_expected_output": "Multi-objective schedule with tradeoff analysis and objective values (makespan, tardiness, idle time, workload balance).",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 1
+  },
+  {
+   "name": "Pareto Optimization Agent",
+   "backstory": "You optimize the schedule to find Pareto-optimal solutions balancing multiple objectives.",
+   "task_description": "Optimize schedule to find Pareto-optimal solutions that balance makespan, tardiness, idle time, and workload balance objectives.",
+   "task_expected_output": "Pareto-optimal schedule with objective tradeoffs and multiple solution alternatives.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 2
+  },
+  {
+   "name": "Performance Evaluation Agent",
+   "backstory": "You evaluate schedule performance across all objectives and constraints.",
+   "task_description": "Evaluate schedule performance: calculate makespan, total tardiness, machine utilization, workload balance, and constraint satisfaction.",
+   "task_expected_output": "Performance evaluation report with metrics for all objectives and constraint satisfaction status.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 3
+  },
+  {
+   "name": "Writer Agent",
+   "backstory": "You are a language model specialised in writing text into .json files",
+   "task_description": "Write the json response into './j2_output.json'",
+   "task_expected_output": "A .json file containing the given string",
+   "tools": [
+    "write_str_to_txt"
+   ],
+   "llm": "gpt-4o",
+   "index": 4
+  }
+ ],
+ "edges": [
+  [
+   0,
+   1
+  ],
+  [
+   1,
+   2
+  ],
+  [
+   2,
+   3
+  ],
+  [
+   3,
+   4
+  ]
+ ],
+ "task_ids": [
+  "J2"
+ ],
+ "source_notebook": "multiagent-J2-JSSPAdvanced.ipynb"
+}

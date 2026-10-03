@@ -1,0 +1,99 @@
+{
+ "notebook": "multiagent-P9-ThanksgivingReport-Copy1.ipynb",
+ "dag_ok": true,
+ "agents": [
+  {
+   "name": "Writer Agent",
+   "backstory": "You are a language model specialised in writing text into .txt files",
+   "task_description": "Write the string 'This is a Tool Agent' into './tool_agent_example.txt'",
+   "task_expected_output": "A .txt file containing the given string",
+   "tools": [
+    "write_str_to_txt"
+   ],
+   "llm": "gpt-4o",
+   "index": 0
+  },
+  {
+   "name": "Member & Time Setup Agent",
+   "backstory": "You track family members' arrivals and ensure accurate scheduling.",
+   "task_description": "Set up arrival times, locations, and travel durations for all family members.",
+   "task_expected_output": "Structured schedule ensuring all members arrive on time for dinner. - Sarah(Mom):Host,athome, - James(Dad):LandsatBOS1:00PMfromSF, - Emily(Sister):LandsatBOS2:30PMfromChicago - Michael(Brother):Driving,arrives3:00PMfromNY - Grandma:NeedspickupfromsuburbanBoston",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 1
+  },
+  {
+   "name": "Requirement Setup Agent",
+   "backstory": "You manage cooking schedules and key logistical needs.",
+   "task_description": "Schedule turkey and side dish preparation while ensuring someone stays home for supervision.",
+   "task_expected_output": "Optimized cooking schedule aligning with dinner timing. cooking requirements:  -Turkey:4hourscookingtime, - Sidedishes:2hourspreparation, - Someonemuststayhomeduringcooking, ",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 2
+  },
+  {
+   "name": "Disruption Update Agent",
+   "backstory": "You manage unexpected disruptions such as flight delays.",
+   "task_description": "Adjust schedule due to James's flight delay by 1 hour.",
+   "task_expected_output": "Updated schedule reflecting James's new arrival time at 2:00 PM.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 3
+  },
+  {
+   "name": "Constraint Validation Agent",
+   "backstory": "You verify all scheduling constraints and ensure compliance.",
+   "task_description": "Validate that all pickups, cooking timelines, and supervision requirements are met.",
+   "task_expected_output": "A conflict-free schedule ensuring all tasks are completed efficiently. - Jamesmustrentcarafterlanding, - Emilyrequiresairportpickup ,- Traveltimes: – HometoBOSAirport:60min – BOSAirporttoGrandma’s:60min – HometoGrandma’s:30min",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 4
+  },
+  {
+   "name": "Supervisor Agent",
+   "backstory": "You oversee all logistical elements and generate the final dinner preparation report.",
+   "task_description": "Monitor and report on key tasks, including cooking start time, Emily's pickup, and Grandma's pickup.",
+   "task_expected_output": "Comprehensive report detailing dinner preparation logistics and arrivals. key requirement: - Allfamilymembersathomefor6:00PMdinner - Turkeyandsidesreadybydinnertime - Allpickupscompletedwithavailabledrivers - Cookingsupervisionmaintained",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 5
+  },
+  {
+   "name": "Writer Agent",
+   "backstory": "You are a language model specialised in writing text into .json files",
+   "task_description": "Write the json response into './p9_output.json'",
+   "task_expected_output": "A .json file containing the given string",
+   "tools": [
+    "write_str_to_txt"
+   ],
+   "llm": "gpt-4o",
+   "index": 6
+  }
+ ],
+ "edges": [
+  [
+   1,
+   2
+  ],
+  [
+   2,
+   3
+  ],
+  [
+   3,
+   4
+  ],
+  [
+   4,
+   5
+  ],
+  [
+   5,
+   6
+  ]
+ ],
+ "task_ids": [
+  "P9"
+ ],
+ "source_notebook": "multiagent-P9-ThanksgivingReport-Copy1.ipynb"
+}

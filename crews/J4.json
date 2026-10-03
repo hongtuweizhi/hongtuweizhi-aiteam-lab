@@ -1,0 +1,101 @@
+{
+ "notebook": "multiagent-J4-JSSPReactive.ipynb",
+ "dag_ok": true,
+ "agents": [
+  {
+   "name": "Job & Machine Setup Agent",
+   "backstory": "You define jobs, machines, processing times, and create initial schedule for reactive JSSP.",
+   "task_description": "Set up JSSP instance with jobs, machines, processing times, and create initial baseline schedule with real-time monitoring capabilities.",
+   "task_expected_output": "Structured JSSP data with initial schedule: jobs, machines, processing times, baseline schedule, and monitoring setup.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 0
+  },
+  {
+   "name": "Real-time Monitoring Agent",
+   "backstory": "You continuously monitor shop floor operations, machine status, job progress, and resource availability in real-time.",
+   "task_description": "Monitor real-time conditions: track machine status (operational, maintenance, breakdown), job progress (completion percentage, current operation), resource levels, and queue lengths.",
+   "task_expected_output": "Real-time status report: machine states, job progress, resource availability, and current system performance metrics.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 1
+  },
+  {
+   "name": "Anomaly Detection Agent",
+   "backstory": "You detect anomalies and deviations from the planned schedule including delays, early completions, and unexpected events.",
+   "task_description": "Detect anomalies: identify schedule deviations (delays, early completions), unexpected events (machine slowdowns, quality issues), and performance degradation.",
+   "task_expected_output": "Anomaly report: detected deviations, unexpected events, impact assessment, and priority ranking of issues requiring attention.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 2
+  },
+  {
+   "name": "Adaptive Replanning Agent",
+   "backstory": "You continuously adapt the schedule based on real-time conditions and detected anomalies, making incremental adjustments.",
+   "task_description": "Adapt schedule: make real-time adjustments to operation sequences, machine assignments, and timing based on current conditions and detected anomalies, minimizing disruption.",
+   "task_expected_output": "Adapted schedule with real-time adjustments, updated operation times, and revised machine assignments.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 3
+  },
+  {
+   "name": "Performance Tracking Agent",
+   "backstory": "You track schedule performance metrics and evaluate the effectiveness of adaptations.",
+   "task_description": "Track performance: monitor makespan, machine utilization, job completion rates, schedule adherence, and adaptation effectiveness over time.",
+   "task_expected_output": "Performance tracking report: current metrics, trends, adaptation effectiveness, and recommendations for improvement.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 4
+  },
+  {
+   "name": "Continuous Improvement Agent",
+   "backstory": "You analyze patterns and learn from adaptations to improve future scheduling decisions.",
+   "task_description": "Improve scheduling: analyze adaptation patterns, learn from successful strategies, identify improvement opportunities, and refine scheduling heuristics.",
+   "task_expected_output": "Improvement recommendations: learned patterns, refined heuristics, and strategies for better future scheduling performance.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 5
+  },
+  {
+   "name": "Writer Agent",
+   "backstory": "You are a language model specialised in writing text into .json files",
+   "task_description": "Write the json response into './j4_output.json'",
+   "task_expected_output": "A .json file containing the given string",
+   "tools": [
+    "write_str_to_txt"
+   ],
+   "llm": "gpt-4o",
+   "index": 6
+  }
+ ],
+ "edges": [
+  [
+   0,
+   1
+  ],
+  [
+   1,
+   2
+  ],
+  [
+   2,
+   3
+  ],
+  [
+   3,
+   4
+  ],
+  [
+   4,
+   5
+  ],
+  [
+   5,
+   6
+  ]
+ ],
+ "task_ids": [
+  "J4"
+ ],
+ "source_notebook": "multiagent-J4-JSSPReactive.ipynb"
+}

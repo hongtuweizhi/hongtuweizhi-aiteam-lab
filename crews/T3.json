@@ -1,0 +1,42 @@
+{
+ "task_ids": ["T3"],
+ "source_notebook": "aiteam 实验室手写（论文 crew 风格；T3 无对应 notebook，本配置即固定流程条件的人工角色设计——课题 9 的一手成本数据）",
+ "agents": [
+  {
+   "name": "Instance Confirmation Agent",
+   "backstory": "You restate scheduling instance data exactly as given. You never alter, invent, or omit numbers, and you flag anything ambiguous instead of guessing.",
+   "task_description": "Read the pinned JSSP instance from the task description (3 machines M1-M3; jobs J1-J3; each job has 3 operations Jx-Oxy, each on a fixed machine with a fixed duration in hours). Restate the full instance table verbatim: every operation id with its machine and duration, in job order. Do not invent, change, or omit any operation.",
+   "task_expected_output": "The complete instance table verbatim: J1/J2/J3 operation sequences, each operation with its machine and duration.",
+   "tools": []
+  },
+  {
+   "name": "Schedule Construction Agent",
+   "backstory": "You construct feasible job-shop schedules: operation order within each job is respected, and two operations on the same machine never overlap.",
+   "task_description": "Using the confirmed instance, construct a feasible schedule: assign a start and end time to every one of the 9 operations, respecting (a) operation order within each job, (b) no overlap between operations on the same machine, (c) durations exactly as specified. Start from time 0.",
+   "task_expected_output": "A feasible schedule listing all 9 operations as {task: '<op_id>', start: <hours>, end: <hours>}.",
+   "tools": []
+  },
+  {
+   "name": "Makespan Optimization Agent",
+   "backstory": "You minimize the total completion time (makespan) of a job-shop schedule by reordering operations, while keeping the schedule feasible.",
+   "task_description": "Improve the constructed schedule to minimize the makespan (the time at which the last operation finishes). Every operation keeps its fixed machine and duration; you may only change start times/order subject to feasibility (job precedence + machine non-overlap).",
+   "task_expected_output": "An improved feasible schedule for all 9 operations, with the achieved makespan stated explicitly.",
+   "tools": []
+  },
+  {
+   "name": "Constraint Validation Agent",
+   "backstory": "You verify job-shop schedules mechanically: operation coverage, precedence within each job, machine non-overlap, and exact durations. You fix violations and re-check.",
+   "task_description": "Validate the optimized schedule operation by operation: all 9 operations present, precedence within each job respected, no overlap on any machine, durations exactly as specified. Fix any violation and re-validate until clean.",
+   "task_expected_output": "The validated schedule for all 9 operations, with a per-check pass statement.",
+   "tools": []
+  },
+  {
+   "name": "Writer Agent",
+   "backstory": "You are a language model specialised in writing text into .json files",
+   "task_description": "Write the final validated schedule into './t3_output.json'",
+   "task_expected_output": "A .json file containing the final schedule",
+   "tools": ["write_str_to_txt"]
+  }
+ ],
+ "edges": [[0, 1], [1, 2], [2, 3], [3, 4]]
+}

@@ -1,0 +1,142 @@
+[
+ {
+  "anon": "卷001",
+  "task": "P2",
+  "condition": "free",
+  "redactions": [],
+  "chars": 922
+ },
+ {
+  "anon": "卷002",
+  "task": "P8",
+  "condition": "free",
+  "redactions": [],
+  "chars": 2869
+ },
+ {
+  "anon": "卷003",
+  "task": "P1",
+  "condition": "fixed",
+  "redactions": [],
+  "chars": 1427
+ },
+ {
+  "anon": "卷004",
+  "task": "P2",
+  "condition": "fixed",
+  "redactions": [],
+  "chars": 736
+ },
+ {
+  "anon": "卷005",
+  "task": "P4",
+  "condition": "fixed",
+  "redactions": [],
+  "chars": 1929
+ },
+ {
+  "anon": "卷006",
+  "task": "P5",
+  "condition": "free",
+  "redactions": [],
+  "chars": 2304
+ },
+ {
+  "anon": "卷007",
+  "task": "P5",
+  "condition": "fixed",
+  "redactions": [],
+  "chars": 1303
+ },
+ {
+  "anon": "卷008",
+  "task": "P8",
+  "condition": "fixed",
+  "redactions": [],
+  "chars": 1368
+ },
+ {
+  "anon": "卷009",
+  "task": "P10",
+  "condition": "fixed",
+  "redactions": [],
+  "chars": 2128
+ },
+ {
+  "anon": "卷010",
+  "task": "P7",
+  "condition": "free",
+  "redactions": [],
+  "chars": 2983
+ },
+ {
+  "anon": "卷011",
+  "task": "P4",
+  "condition": "free",
+  "redactions": [],
+  "chars": 1645
+ },
+ {
+  "anon": "卷012",
+  "task": "P6",
+  "condition": "fixed",
+  "redactions": [],
+  "chars": 2381
+ },
+ {
+  "anon": "卷013",
+  "task": "P1",
+  "condition": "free",
+  "redactions": [],
+  "chars": 1751
+ },
+ {
+  "anon": "卷014",
+  "task": "P10",
+  "condition": "free",
+  "redactions": [],
+  "chars": 2991
+ },
+ {
+  "anon": "卷015",
+  "task": "P9",
+  "condition": "fixed",
+  "redactions": [],
+  "chars": 1330
+ },
+ {
+  "anon": "卷016",
+  "task": "P7",
+  "condition": "fixed",
+  "redactions": [],
+  "chars": 2353
+ },
+ {
+  "anon": "卷017",
+  "task": "P6",
+  "condition": "free",
+  "redactions": [],
+  "chars": 1900
+ },
+ {
+  "anon": "卷018",
+  "task": "P9",
+  "condition": "free",
+  "redactions": [],
+  "chars": 1596
+ },
+ {
+  "anon": "卷019",
+  "task": "P3",
+  "condition": "fixed",
+  "redactions": [],
+  "chars": 1259
+ },
+ {
+  "anon": "卷020",
+  "task": "P3",
+  "condition": "free",
+  "redactions": [],
+  "chars": 1529
+ }
+]

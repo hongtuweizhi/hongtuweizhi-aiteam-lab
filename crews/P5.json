@@ -1,0 +1,112 @@
+{
+ "notebook": "multiagent-P5-WeddingLogistics-copy1.ipynb",
+ "dag_ok": true,
+ "agents": [
+  {
+   "name": "Writer Agent",
+   "backstory": "You are a language model specialised in writing text into .txt files",
+   "task_description": "Write the string 'This is a Tool Agent' into './tool_agent_example.txt'",
+   "task_expected_output": "A .txt file containing the given string",
+   "tools": [
+    "write_str_to_txt"
+   ],
+   "llm": "gpt-4o",
+   "index": 0
+  },
+  {
+   "name": "Locations and Time Setup Agent",
+   "backstory": "You define locations, travel times, and guest arrival schedules.",
+   "task_description": "Set up locations, travel times, and ensure accurate scheduling of arrivals.",
+   "task_expected_output": "Structured location data and expected arrival times. Fourlocations:𝑉 ={𝐵,𝐺,𝑇,𝑊},where𝐵isBostonAir- port, 𝐺 is Gift shop, 𝑇 is Tailor shop, and 𝑊 is Wedding venue. 𝐵-𝐺 : 45, 𝐵-𝑇 : 30, 𝐵-𝑊 : 40, 𝐺-𝑇 : 20, 𝐺-𝑊 : 25, 𝑇-𝑊 : 15. - Alex:At𝐵at11:00AMfromChicago(needaride) - Jamie:At𝐵at12:30PMfromAtlanta(needaride) - Pat: At 𝑊 at 12:00 PM driving from NYC (has 5-seater car)",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 1
+  },
+  {
+   "name": "Task Setup Agent",
+   "backstory": "You manage the scheduling of required wedding tasks.",
+   "task_description": "Schedule gift collection after 12:00 PM, clothes pickup before 2:00 PM, and ensure photo session at 3:00 PM.",
+   "task_expected_output": "Optimized task schedule aligned with constraints.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 2
+  },
+  {
+   "name": "Disruption Update Agent",
+   "backstory": "You monitor road closures and dynamically reroute transportation as needed.",
+   "task_description": "Identify any road closures or unexpected disruptions and adjust travel plans accordingly.",
+   "task_expected_output": "In case there is road closures of B to G, and dynamically reroute transportation. Updated task schedule, ensuring minimal delays and timely arrivals with new updates.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 3
+  },
+  {
+   "name": "Resource Management Agent",
+   "backstory": "You allocate available transport resources efficiently.",
+   "task_description": "Coordinate 5 vehicle usage and Local friend Chris(5-seater)available, for guest transportation and task fulfillment.",
+   "task_expected_output": "Optimized 5 vehicle allocation and friend welcome ensuring timely arrivals. - Onecar(5-seater)withPat,availableafterheisBoston - LocalfriendChris(5-seater)availableafter1:30PMat𝑊",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 4
+  },
+  {
+   "name": "Constraint Validation Agent",
+   "backstory": "You verify all scheduling constraints to ensure smooth execution.",
+   "task_description": "Ensure all tasks are completed within operating hours and vehicle constraints are met.",
+   "task_expected_output": "Validated schedule with no conflicts. All tasks must complete before 3:00 PM photo time - Gift store opens at 12:00 PM - Tailor closes at 2:00 PM - Two cars must accommodate all transport needs",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 5
+  },
+  {
+   "name": "Wedding Event Oversight Agent",
+   "backstory": "You oversee the entire wedding logistics to ensure a smooth execution of tasks.",
+   "task_description": "Monitor and ensure all tasks are completed on time, resolving any logistical issues.",
+   "task_expected_output": "Give a wedding scheduling plan for people, task and time.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 6
+  },
+  {
+   "name": "Writer Agent",
+   "backstory": "You are a language model specialised in writing text into .json files",
+   "task_description": "Write the json response into './p5_output.json'",
+   "task_expected_output": "A .json file containing the given string",
+   "tools": [
+    "write_str_to_txt"
+   ],
+   "llm": "gpt-4o",
+   "index": 7
+  }
+ ],
+ "edges": [
+  [
+   1,
+   2
+  ],
+  [
+   2,
+   3
+  ],
+  [
+   3,
+   4
+  ],
+  [
+   4,
+   5
+  ],
+  [
+   5,
+   6
+  ],
+  [
+   6,
+   7
+  ]
+ ],
+ "task_ids": [
+  "P5"
+ ],
+ "source_notebook": "multiagent-P5-WeddingLogistics-copy1.ipynb"
+}

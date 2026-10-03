@@ -1,0 +1,34 @@
+# 密钥与凭证——绝不提交
+agent/auth.json
+agent-ds/auth.json
+agent/deepseek_key.txt
+agent-ds/models.json
+*.key
+.env
+
+# 运行产物（大，且含原始模型输出）
+runs/
+runs-ds/
+runs-free/
+realm-battle-*/
+realm-mock/
+blind/judge_scores*.json
+
+# 缓存与临时
+.uv-cache/
+.uv-python/
+.venv/
+tmp/
+__pycache__/
+*.pyc
+
+# 依赖目录
+repos/REALM-Bench/venv/
+
+# 杂项缓存与日志
+.mpl/
+agent/models-store.json
+agent-ds/models-store.json
+*.log
+probe-debug.log
+repos/

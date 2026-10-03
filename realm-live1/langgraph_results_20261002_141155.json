@@ -1,0 +1,37 @@
+[
+  {
+    "task_id": "P1",
+    "framework": "langgraph",
+    "execution_time": 71.16191554069519,
+    "achieved_goals": [
+      "Task completed based on agent response"
+    ],
+    "satisfied_constraints": [
+      "Constraints considered in planning"
+    ],
+    "resource_usage": {
+      "memory_usage": [
+        {
+          "memory_mb": 216.91015625,
+          "timestamp": 1790921444.2278967
+        },
+        {
+          "memory_mb": 224.30859375,
+          "timestamp": 1790921515.3895893
+        }
+      ],
+      "execution_times": [
+        71.16171979904175
+      ],
+      "token_usage": {}
+    },
+    "metrics": {
+      "goal_satisfaction_rate": 0.0,
+      "makespan": 0.0,
+      "constraint_satisfaction_rate": 0.0,
+      "memory_usage": 224.30859375,
+      "execution_time": 71.16171979904175,
+      "token_usage": 0.0
+    }
+  }
+]

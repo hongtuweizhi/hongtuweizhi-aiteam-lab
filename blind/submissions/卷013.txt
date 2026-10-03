@@ -1,0 +1,47 @@
+【任务描述】Planning visit waypoints within time windows under spatial constraints
+【目标】visit_all_locations（Visit all required campus locations）；minimize_travel_time（Minimize total travel time）；respect_time_windows（Respect all time window constraints）
+【约束】time_windows（deadline）：{"windows": {"library": [9, 12], "cafeteria": [11, 14], "gym": [15, 18]}}；travel_time（resource）：{"distances": {"library-cafeteria": 10, "cafeteria-gym": 15}}；tour_duration（deadline）：{"max_duration": 180}
+【资源】{"locations": ["library", "cafeteria", "gym", "student_center"], "start_location": "entrance", "end_location": "entrance"}
+
+========================================
+
+【匿名产出】
+## 分析
+
+**任务要素**
+- 必须访问：library、cafeteria、gym、student_center；起点/终点均为 entrance。
+- 时间窗：library [9,12]、cafeteria [11,14]、gym [15,18]。
+- 给定行程时间：library–cafeteria = 10，cafeteria–gym = 15（分钟）。
+- 总时长上限 180 分钟。
+
+**关键冲突（不可行性）**
+- library 必须在 9:00–12:00 完成，gym 必须在 15:00–18:00 进行。
+- 仅从 library 最早窗口起点 9:00 到 gym 最早窗口起点 15:00，就已经是 **6 小时 = 360 分钟**，远超 max_duration = 180 分钟。
+- 因此 `tour_duration` 与 `time_windows` 在给定数据下**数学上互斥**：无论怎样排序，都无法同时满足。这是 12:00–15:00 的窗口空档（3 小时）本身造成的。
+
+**规划决策**
+- 优先保证「访问全部地点」与「遵守时间窗」两大硬约束，并在此基础上最小化旅行时间（选择最短路径 library→cafeteria→gym，利用给定的最短边）。
+- 空档时间（10:00–11:00、12:15–15:00）用于插入无窗口限制的 student_center 以及等待 gym 开放，不额外增加行程时间。
+- 代价是总时长约 435 分钟 > 180 分钟，故 `tour_duration` 无法满足，如实标注。
+
+**最优路线**：entrance → library → student_center → cafeteria → gym → entrance，利用最短边 library–cafeteria(10) 与 cafeteria–gym(15)。
+
+```json
+{
+  "achieved_goals": ["visit_all_locations", "minimize_travel_time", "respect_time_windows"],
+  "constraints_satisfied": ["time_windows", "travel_time"],
+  "schedule": [
+    {"task": "travel entrance→library", "start": 9.0, "end": 9.1},
+    {"task": "visit library (window 9-12)", "start": 9.1, "end": 10.0},
+    {"task": "travel library→student_center", "start": 10.0, "end": 10.1},
+    {"task": "visit student_center", "start": 10.1, "end": 11.0},
+    {"task": "visit cafeteria (window 11-14)", "start": 11.0, "end": 12.0},
+    {"task": "travel cafeteria→gym (15 min)", "start": 12.0, "end": 12.25},
+    {"task": "wait for gym window to open", "start": 12.25, "end": 15.0},
+    {"task": "visit gym (window 15-18)", "start": 15.0, "end": 16.0},
+    {"task": "travel gym→entrance", "start": 16.0, "end": 16.25}
+  ]
+}
+```
+
+`tour_duration` (max 180 min) **未满足**：受 library 与 gym 时间窗约束，最短可能总时长约 390–435 分钟，超出上限，属数据层面的不可行约束（不可两全）。

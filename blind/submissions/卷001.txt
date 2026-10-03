@@ -1,0 +1,38 @@
+【任务描述】Scheduling multiple tour guides to serve independent visitor groups concurrently
+【目标】serve_all_groups（Serve all visitor groups）；minimize_wait_time（Minimize group wait times）；balance_guide_workload（Balance workload across guides）
+【约束】guide_availability（resource）：{"guides": {"guide1": [9, 17], "guide2": [10, 16]}}；group_size（capacity）：{"max_group_size": 15}；tour_duration（deadline）：{"tour_duration": 90}
+【资源】{"guides": ["guide1", "guide2", "guide3"], "groups": [{"id": "group1", "size": 12, "preferred_time": 10}, {"id": "group2", "size": 8, "preferred_time": 11}]}
+
+========================================
+
+【匿名产出】
+## 分析
+
+**资源清点**
+- 花名册列出 3 名导游，但 `guide_availability` 只给出 guide1 [9,17] 与 guide2 [10,16]；guide3 未给出任何可用时段，视为不可排班（不可冒险派活）。
+- 团队：group1（12 人，偏好 10:00）、group2（8 人，偏好 11:00）。
+
+**约束检查**
+- `group_size`：12 ≤ 15、8 ≤ 15 ✅
+- `tour_duration`：90 分钟 = 1.5 小时，需连续整段 ✅
+- `guide_availability`：只有 guide1 / guide2 可用，且各自时段能容纳 1.5 小时 ✅
+
+**排班推理**
+- 两个团队、两位可用导游 → 各接一团，可完全并行。
+- 直接按各自 preferred_time 开工，等待时间均为 0（无法更低）。
+- group1 交给 guide1：10:00–11:30（落在 [9,17] 内）。
+- group2 交给 guide2：11:00–12:30（落在 [10,16] 内）。
+- 工作量：guide1 1.5h，guide2 1.5h，两导游负载相等，均衡。
+
+**结论**：所有团队被服务，总等待 0，导游负载均衡；guide3 因无可用时段不排班。
+
+```json
+{
+  "achieved_goals": ["serve_all_groups", "minimize_wait_time", "balance_guide_workload"],
+  "constraints_satisfied": ["guide_availability", "group_size", "tour_duration"],
+  "schedule": [
+    {"task": "group1 (12人) 导览 - guide1", "start": 10.0, "end": 11.5},
+    {"task": "group2 (8人) 导览 - guide2", "start": 11.0, "end": 12.5}
+  ]
+}
+```

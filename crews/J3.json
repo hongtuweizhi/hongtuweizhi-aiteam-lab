@@ -1,0 +1,88 @@
+{
+ "notebook": "multiagent-J3-JSSPDynamic.ipynb",
+ "dag_ok": true,
+ "agents": [
+  {
+   "name": "Job & Machine Setup Agent",
+   "backstory": "You define jobs, machines, processing times, and initial schedule for dynamic JSSP.",
+   "task_description": "Set up JSSP instance with jobs, machines, processing times, and create initial baseline schedule.",
+   "task_expected_output": "Structured JSSP data with initial schedule: jobs, machines, processing times, and baseline schedule.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 0
+  },
+  {
+   "name": "Disruption Detection Agent",
+   "backstory": "You monitor the shop floor and detect disruptions such as machine breakdowns and material shortages.",
+   "task_description": "Detect disruptions: identify machine breakdowns (machine_id, duration), material shortages (resource, shortage percentage), and other unexpected events.",
+   "task_expected_output": "Disruption report: type of disruption, affected machines/resources, duration/impact, and affected operations.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 1
+  },
+  {
+   "name": "Impact Analysis Agent",
+   "backstory": "You analyze the impact of disruptions on the current schedule and identify affected operations.",
+   "task_description": "Analyze disruption impact: identify operations affected by machine breakdowns or resource shortages, estimate delay impacts, and determine rescheduling needs.",
+   "task_expected_output": "Impact analysis: list of affected operations, estimated delays, makespan impact, and operations requiring rescheduling.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 2
+  },
+  {
+   "name": "Replanning Agent",
+   "backstory": "You replan the schedule to accommodate disruptions while minimizing makespan increase and maintaining feasibility.",
+   "task_description": "Replan schedule: reschedule affected operations, reassign to alternative machines if available, adjust operation sequences, and minimize makespan increase.",
+   "task_expected_output": "Replanned schedule with updated operation times, machine reassignments, and new makespan.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 3
+  },
+  {
+   "name": "Recovery Optimization Agent",
+   "backstory": "You optimize the recovery plan to minimize disruption impact and restore schedule quality.",
+   "task_description": "Optimize recovery: fine-tune replanned schedule to minimize makespan increase, balance machine workload, and ensure all constraints are satisfied.",
+   "task_expected_output": "Optimized recovery schedule with minimal makespan increase, balanced workload, and full constraint satisfaction.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 4
+  },
+  {
+   "name": "Writer Agent",
+   "backstory": "You are a language model specialised in writing text into .json files",
+   "task_description": "Write the json response into './j3_output.json'",
+   "task_expected_output": "A .json file containing the given string",
+   "tools": [
+    "write_str_to_txt"
+   ],
+   "llm": "gpt-4o",
+   "index": 5
+  }
+ ],
+ "edges": [
+  [
+   0,
+   1
+  ],
+  [
+   1,
+   2
+  ],
+  [
+   2,
+   3
+  ],
+  [
+   3,
+   4
+  ],
+  [
+   4,
+   5
+  ]
+ ],
+ "task_ids": [
+  "J3"
+ ],
+ "source_notebook": "multiagent-J3-JSSPDynamic.ipynb"
+}

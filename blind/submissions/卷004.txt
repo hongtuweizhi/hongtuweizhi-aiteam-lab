@@ -1,0 +1,28 @@
+【任务描述】Scheduling multiple tour guides to serve independent visitor groups concurrently
+【目标】serve_all_groups（Serve all visitor groups）；minimize_wait_time（Minimize group wait times）；balance_guide_workload（Balance workload across guides）
+【约束】guide_availability（resource）：{"guides": {"guide1": [9, 17], "guide2": [10, 16]}}；group_size（capacity）：{"max_group_size": 15}；tour_duration（deadline）：{"tour_duration": 90}
+【资源】{"guides": ["guide1", "guide2", "guide3"], "groups": [{"id": "group1", "size": 12, "preferred_time": 10}, {"id": "group2", "size": 8, "preferred_time": 11}]}
+
+========================================
+
+【匿名产出】
+我已完成工作负载平衡的分析与调整，并将最终结果写入 `./p2_output.json`。
+
+**分析过程：**
+- 2 个不可拆分的 60 分钟团（group1 12 人、group2 8 人），3 名向导。
+- 理想均值：0.67 团/向导、40 分钟/向导；实际分配 `{60, 60, 0}`，偏差 ±20/−40 分钟，离散度 60 分钟。
+- 因团数少于向导数且每团不可拆分，`{60,60,0}` 是理论最优，无法进一步改善。
+- 采用公平轮换规则补偿 guide3：下一可用团优先分配给 guide3，保持跨周期公平。
+- 所有约束（向导可用时段、团规模 ≤15 不拆分、90 分钟时长上限）均满足。
+
+```json
+{
+  "achieved_goals": ["serve_all_groups", "balance_guide_workload"],
+  "constraints_satisfied": ["guide_availability", "group_size", "tour_duration"],
+  "schedule": [
+    {"task": "group1 tour with guide1 (12 pax)", "start": 10.0, "end": 11.0},
+    {"task": "group2 tour with guide2 (8 pax)", "start": 11.0, "end": 12.0},
+    {"task": "guide3 standby / next-in-line priority #1", "start": 10.0, "end": 12.0}
+  ]
+}
+```

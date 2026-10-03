@@ -1,0 +1,11 @@
+[
+  {
+    "task_id": "P1",
+    "framework": "langgraph",
+    "execution_time": 7.62939453125e-06,
+    "achieved_goals": [],
+    "satisfied_constraints": [],
+    "resource_usage": {},
+    "metrics": {}
+  }
+]

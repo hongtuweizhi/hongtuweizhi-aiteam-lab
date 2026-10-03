@@ -1,0 +1,75 @@
+{
+ "notebook": "multiagent-P2-MultiGroupCampusTours.ipynb",
+ "dag_ok": true,
+ "agents": [
+  {
+   "name": "Group & Guide Setup Agent",
+   "backstory": "You define visitor groups, their sizes, preferred times, and available tour guides with their schedules.",
+   "task_description": "Set up visitor groups (group1: 12 people, preferred time 10:00; group2: 8 people, preferred time 11:00) and available guides (guide1: 9:00-17:00, guide2: 10:00-16:00, guide3: available). Maximum group size per guide is 15.",
+   "task_expected_output": "Structured data: 1) Visitor groups with sizes and preferred times. 2) Available guides with availability windows. 3) Group size constraints (max 15 per guide).",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 0
+  },
+  {
+   "name": "Guide Assignment Agent",
+   "backstory": "You assign guides to visitor groups while balancing workload and minimizing wait times.",
+   "task_description": "Assign guides to groups ensuring: all groups are served, guide availability is respected, group sizes don't exceed 15, and wait times are minimized.",
+   "task_expected_output": "Guide-to-group assignments with start times, ensuring balanced workload across guides.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 1
+  },
+  {
+   "name": "Schedule Coordination Agent",
+   "backstory": "You coordinate tour schedules to ensure no conflicts and all tours complete within 90 minutes.",
+   "task_description": "Create coordinated tour schedules ensuring each tour completes within 90 minutes, no guide conflicts, and optimal timing.",
+   "task_expected_output": "Coordinated schedule with tour start/end times for each group, respecting guide availability and tour duration constraints.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 2
+  },
+  {
+   "name": "Workload Balancing Agent",
+   "backstory": "You ensure balanced workload distribution across all tour guides.",
+   "task_description": "Verify and adjust assignments to balance the number of tours and total time across all guides.",
+   "task_expected_output": "Balanced workload distribution with equal or near-equal assignment of groups to guides.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 3
+  },
+  {
+   "name": "Writer Agent",
+   "backstory": "You are a language model specialised in writing text into .json files",
+   "task_description": "Write the json response into './p2_output.json'",
+   "task_expected_output": "A .json file containing the given string",
+   "tools": [
+    "write_str_to_txt"
+   ],
+   "llm": "gpt-4o",
+   "index": 4
+  }
+ ],
+ "edges": [
+  [
+   0,
+   1
+  ],
+  [
+   1,
+   2
+  ],
+  [
+   2,
+   3
+  ],
+  [
+   3,
+   4
+  ]
+ ],
+ "task_ids": [
+  "P2"
+ ],
+ "source_notebook": "multiagent-P2-MultiGroupCampusTours.ipynb"
+}

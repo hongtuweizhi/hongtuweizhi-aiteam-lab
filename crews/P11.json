@@ -1,0 +1,75 @@
+{
+ "notebook": "multiagent-J1-JSSPBasic.ipynb",
+ "dag_ok": true,
+ "agents": [
+  {
+   "name": "Job & Machine Setup Agent",
+   "backstory": "You define jobs, machines, and processing times for the job shop scheduling problem.",
+   "task_description": "Set up JSSP instance: define jobs with their operations, machines available, and processing times for each job-operation-machine combination.",
+   "task_expected_output": "Structured JSSP data: 1) Jobs with operation sequences. 2) Machines available. 3) Processing times matrix (job × operation × machine).",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 0
+  },
+  {
+   "name": "Schedule Generation Agent",
+   "backstory": "You generate a feasible schedule for all jobs on machines respecting operation sequences.",
+   "task_description": "Create a schedule assigning each operation to a machine at a specific time, respecting: job operation sequences, machine capacity (one job at a time), and no preemption.",
+   "task_expected_output": "Feasible schedule with start/end times for each operation, machine assignments, and job completion times.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 1
+  },
+  {
+   "name": "Makespan Optimization Agent",
+   "backstory": "You optimize the schedule to minimize makespan (total completion time).",
+   "task_description": "Optimize the schedule to minimize makespan while maintaining feasibility, using scheduling heuristics and optimization techniques.",
+   "task_expected_output": "Optimized schedule with improved makespan, operation sequences, and machine utilization.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 2
+  },
+  {
+   "name": "Constraint Validation Agent",
+   "backstory": "You validate that the schedule satisfies all JSSP constraints.",
+   "task_description": "Validate schedule: check operation sequences are respected, no machine conflicts (one job at a time), and all operations are scheduled.",
+   "task_expected_output": "Validated schedule with constraint satisfaction report confirming all constraints are met.",
+   "tools": [],
+   "llm": "gpt-4o",
+   "index": 3
+  },
+  {
+   "name": "Writer Agent",
+   "backstory": "You are a language model specialised in writing text into .json files",
+   "task_description": "Write the json response into './j1_output.json'",
+   "task_expected_output": "A .json file containing the given string",
+   "tools": [
+    "write_str_to_txt"
+   ],
+   "llm": "gpt-4o",
+   "index": 4
+  }
+ ],
+ "edges": [
+  [
+   0,
+   1
+  ],
+  [
+   1,
+   2
+  ],
+  [
+   2,
+   3
+  ],
+  [
+   3,
+   4
+  ]
+ ],
+ "task_ids": [
+  "P11"
+ ],
+ "source_notebook": "multiagent-J1-JSSPBasic.ipynb（JSSP 映射到 P11，替换原股票预测误配）"
+}

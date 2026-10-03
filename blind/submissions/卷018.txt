@@ -1,0 +1,39 @@
+【任务描述】Planning and scheduling with flight delays and recovery windows for meal and guest coordination
+【目标】coordinate_travel（Coordinate all family travel）；prepare_meal（Complete meal preparation on time）；adapt_to_delays（Successfully adapt to flight delays）
+【约束】dinner_deadline（deadline）：{"deadline": "18:00"}；kitchen_capacity（capacity）：{"max_cooks": 3}；flight_schedules（resource）：{"flights": {"flight1": "14:00", "flight2": "15:30"}}
+【资源】{"vehicles": [{"id": "car1", "capacity": 4, "location": "home"}, {"id": "car2", "capacity": 4, "location": "airport"}], "cooking_tasks": ["turkey", "stuffing", "gravy", "potatoes"], "family_members": [{"id": "mom", "skills": ["turkey"], "flight": "flight1"}, {"id": "dad", "skills": ["potatoes"], "flight": "flight2"}]}
+
+========================================
+
+【匿名产出】
+## 分析与规划
+
+**关键事实梳理**
+- 航班：flight1（mom）14:00 到达，flight2（dad）15:30 到达；存在延误风险，需要"恢复窗口"。
+- 车辆：car1 在 home（容量4），car2 在 airport（容量4）。假设 home↔airport 单程 1 小时。
+- 厨房：最多同时 3 人做饭；实际只有 mom（turkey 技能）和 dad（potatoes 技能）两位厨师。
+- 硬约束：晚餐必须在 18:00 前完成；turkey 是最长工序（约 2.5h），必须在 15:30 前开火才能压线。
+
+**调度思路**
+1. **接送**：car2 本就在机场，直接 14:00 接 mom 回 home（15:00 到）；car1 13:00 从 home 出发 14:00 到机场，等待 dad（含延误恢复窗口），15:30 接到后 16:30 到家。两车并行，保证两位家人都在 17:00 前到家参与做饭。
+2. **延误恢复窗口**：为 flight2 预留 14:00–15:30 的机场等待缓冲；即使 flight2 延误至 16:00，car1 仍可在 17:00 到家，dad 仍能完成 potatoes，不破坏 18:00 死线。
+3. **做饭**：mom 一到家（15:00）立刻启动 turkey（15:15–17:45，留 15 分钟静置/上桌）。dad 16:30 到家后 16:30–17:30 做 potatoes。stuffing 与 gravy 由 mom（turkey 空档期）在 17:30–17:50 完成。任一时刻做饭人数 ≤ 2，满足 max_cooks=3。
+4. **18:00 上桌**，满足 dinner_deadline。
+
+```json
+{
+  "achieved_goals": ["coordinate_travel", "prepare_meal", "adapt_to_delays"],
+  "constraints_satisfied": ["dinner_deadline", "kitchen_capacity", "flight_schedules"],
+  "schedule": [
+    {"task": "car1_depart_home_to_airport", "start": 13.0, "end": 14.0},
+    {"task": "car1_wait_at_airport_recovery_window_flight2", "start": 14.0, "end": 15.5},
+    {"task": "car2_pickup_mom_airport_to_home", "start": 14.0, "end": 15.0},
+    {"task": "turkey_prep_cook_mom", "start": 15.25, "end": 17.75},
+    {"task": "car1_pickup_dad_airport_to_home", "start": 15.5, "end": 16.5},
+    {"task": "potatoes_cook_dad", "start": 16.5, "end": 17.5},
+    {"task": "stuffing_cook_mom", "start": 17.5, "end": 17.75},
+    {"task": "gravy_cook_mom", "start": 17.75, "end": 17.9},
+    {"task": "dinner_served", "start": 18.0, "end": 19.0}
+  ]
+}
+```

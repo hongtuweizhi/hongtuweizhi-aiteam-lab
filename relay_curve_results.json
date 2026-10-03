@@ -1,0 +1,137 @@
+{
+ "model": "deepseek-v4.1-flash",
+ "endpoint": "https://opencode.ai/zen/go/v1",
+ "runs": 3,
+ "data": {
+  "4": [
+   {
+    "parse": true,
+    "correct": 4,
+    "total": 4,
+    "rate": 1.0,
+    "tokens": 515,
+    "run": 0
+   },
+   {
+    "parse": true,
+    "correct": 4,
+    "total": 4,
+    "rate": 1.0,
+    "tokens": 521,
+    "run": 1
+   },
+   {
+    "parse": true,
+    "correct": 4,
+    "total": 4,
+    "rate": 1.0,
+    "tokens": 523,
+    "run": 2
+   }
+  ],
+  "6": [
+   {
+    "parse": true,
+    "correct": 6,
+    "total": 6,
+    "rate": 1.0,
+    "tokens": 613,
+    "run": 0
+   },
+   {
+    "parse": true,
+    "correct": 6,
+    "total": 6,
+    "rate": 1.0,
+    "tokens": 603,
+    "run": 1
+   },
+   {
+    "parse": true,
+    "correct": 6,
+    "total": 6,
+    "rate": 1.0,
+    "tokens": 614,
+    "run": 2
+   }
+  ],
+  "8": [
+   {
+    "parse": true,
+    "correct": 8,
+    "total": 8,
+    "rate": 1.0,
+    "tokens": 894,
+    "run": 0
+   },
+   {
+    "parse": true,
+    "correct": 8,
+    "total": 8,
+    "rate": 1.0,
+    "tokens": 717,
+    "run": 1
+   },
+   {
+    "parse": true,
+    "correct": 8,
+    "total": 8,
+    "rate": 1.0,
+    "tokens": 1042,
+    "run": 2
+   }
+  ],
+  "10": [
+   {
+    "parse": true,
+    "correct": 10,
+    "total": 10,
+    "rate": 1.0,
+    "tokens": 965,
+    "run": 0
+   },
+   {
+    "parse": true,
+    "correct": 10,
+    "total": 10,
+    "rate": 1.0,
+    "tokens": 789,
+    "run": 1
+   },
+   {
+    "parse": true,
+    "correct": 10,
+    "total": 10,
+    "rate": 1.0,
+    "tokens": 975,
+    "run": 2
+   }
+  ],
+  "12": [
+   {
+    "parse": true,
+    "correct": 12,
+    "total": 12,
+    "rate": 1.0,
+    "tokens": 1169,
+    "run": 0
+   },
+   {
+    "parse": true,
+    "correct": 12,
+    "total": 12,
+    "rate": 1.0,
+    "tokens": 1150,
+    "run": 1
+   },
+   {
+    "parse": true,
+    "correct": 12,
+    "total": 12,
+    "rate": 1.0,
+    "tokens": 1068,
+    "run": 2
+   }
+  ]
+ }
+}

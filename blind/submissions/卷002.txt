@@ -1,0 +1,52 @@
+【任务描述】Planning and scheduling with road closures and timing conflicts requiring reactive replanning
+【目标】coordinate_arrivals（Coordinate all guest arrivals）；complete_errands（Complete all required errands）；adapt_to_disruptions（Successfully adapt to disruptions）
+【约束】wedding_deadline（deadline）：{"deadline": "18:00"}；vehicle_capacity（capacity）：{"capacities": {"van": 8, "car1": 4, "car2": 4}}；route_availability（resource）：{"blocked_routes": ["hotel-church", "church-reception"]}
+【资源】{"vehicles": [{"id": "van", "capacity": 8, "location": "hotel"}, {"id": "car1", "capacity": 4, "location": "church"}], "errands": ["flowers", "cake", "decorations", "photographer"], "guests": [{"id": "family1", "arrival_time": "14:00", "location": "airport"}]}
+
+========================================
+
+【匿名产出】
+The worker couldn't start (no API key configured), so I'll complete the analysis and final plan directly.
+
+## Analysis
+
+**Network:** nodes = hotel (H), church (C), reception (R), airport (A), vendors. Blocked: **H–C** and **C–R**. Open: H–A, A–C, A–R, H–R. So any H↔C or C↔R movement must detour through the airport (H→A→C, C→A→R).
+
+**Vehicles (no double-booking):**
+- **van** (cap 8, hotel): flowers, cake, then guest pickup (14:00).
+- **car2** (cap 4): decorations + photographer.
+- **car1** (cap 4, church): reception setup, detouring C→A→R.
+
+**Reactive replanning:** the two blocked segments force both detours above; the schedule absorbs the extra travel time and still finishes before 18:00.
+
+**Checks:**
+- *complete_errands*: flowers ✔, cake ✔, decorations ✔, photographer ✔ — all four assigned to a vehicle.
+- *coordinate_arrivals*: family1 arrives 14:00 at airport; van is pre-positioned by 14:00, picks up (cap 8 ≥ family) and delivers to hotel then venue — no vehicle conflict.
+- *adapt_to_disruptions*: caused by blocked H–C and C–R, resolved via airport detours (tasks 6 and 9).
+- *wedding_deadline*: last logistics end 15:30, ceremony 17:00–18:00 → before 18:00 ✔.
+- *vehicle_capacity*: van 8 (only passengers = family1 ≤ 8), cars 4 each ✔.
+- *route_availability*: no H–C or C–R traversal; only open segments (H–R, H–A, A–C, A–R) used ✔.
+
+```json
+{
+  "achieved_goals": ["coordinate_arrivals", "complete_errands", "adapt_to_disruptions"],
+  "constraints_satisfied": ["wedding_deadline", "vehicle_capacity", "route_availability"],
+  "schedule": [
+    {"task": "van: pick up flowers at florist", "start": 8.0, "end": 8.5},
+    {"task": "van: deliver flowers to reception", "start": 8.5, "end": 9.0},
+    {"task": "van: pick up cake at bakery", "start": 9.0, "end": 9.5},
+    {"task": "van: deliver cake to reception", "start": 9.5, "end": 10.0},
+    {"task": "car2: pick up decorations", "start": 9.0, "end": 9.5},
+    {"task": "car2: detour hotel-airport-church, deliver decorations (avoid blocked hotel-church)", "start": 9.5, "end": 10.5},
+    {"task": "car2: pick up photographer at airport", "start": 10.5, "end": 11.0},
+    {"task": "car2: airport-church, deliver photographer", "start": 11.0, "end": 11.5},
+    {"task": "car1: church-airport-reception detour + reception setup (avoid blocked church-reception)", "start": 11.5, "end": 12.5},
+    {"task": "van: reposition to airport", "start": 13.5, "end": 14.0},
+    {"task": "van: pick up family1 (arrives 14:00)", "start": 14.0, "end": 14.25},
+    {"task": "van: airport-hotel transfer family1", "start": 14.25, "end": 14.75},
+    {"task": "van: hotel-reception transfer family1 to venue", "start": 15.0, "end": 15.5},
+    {"task": "all: final setup and guest seating", "start": 15.5, "end": 17.0},
+    {"task": "wedding ceremony (completes by 18:00 deadline)", "start": 17.0, "end": 18.0}
+  ]
+}
+```

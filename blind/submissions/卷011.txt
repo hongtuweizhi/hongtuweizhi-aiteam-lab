@@ -1,0 +1,41 @@
+【任务描述】Planning and scheduling with traffic delays and dynamic changes to route feasibility
+【目标】serve_all_passengers（Serve all passenger requests）；minimize_delays（Minimize delays due to disruptions）；adapt_to_changes（Successfully adapt to route changes）
+【约束】vehicle_capacity（capacity）：{"capacities": {"vehicle1": 4, "vehicle2": 6}}；passenger_deadlines（deadline）：{"deadlines": {"passenger1": 30, "passenger2": 45}}；route_availability（resource）：{"blocked_routes": ["downtown-airport"]}
+【资源】{"vehicles": [{"id": "vehicle1", "location": "downtown", "capacity": 4}, {"id": "vehicle2", "location": "airport", "capacity": 6}], "passengers": [{"id": "passenger1", "pickup": "downtown", "dropoff": "airport", "deadline": 30}]}
+
+========================================
+
+【匿名产出】
+## 分析
+
+**核心矛盾**：`passenger1` 需要从 `downtown` 到 `airport`，但 `route_availability` 明确封锁了 `downtown-airport` 这条直达线路——直达方案不可行，必须改道。
+
+**关键判断**：
+1. **资源勘查**：`vehicle1`（容量 4）就在 `downtown`，可立即接客；`vehicle2`（容量 6）在 `airport`，处于终点侧待命。资源表中实际只登记了 `passenger1`（`passenger2` 仅出现在 deadline 约束里，无 pickup/dropoff 信息，无法生成运输任务）。
+2. **容量匹配**：`passenger1` 单人，`vehicle1` 容量 4 ≫ 需求；若改用 `vehicle2`（容量 6）同样满足。选 `vehicle1` 因其起点即 pickup 点，无需空驶。
+3. **路线可行性**：`downtown-airport` 封锁 → 拆解为两段绕行：`downtown → ring-junction（外环枢纽）→ airport`，避开封锁走廊。封锁 + 交通延误带来额外时间，需要在里程中预留 buffer。
+4. **时限**：`passenger1` deadline = 30；计划 2.75 小时到达，远早于 30，有充足冗余。
+5. **动态适应**：预留外环备用走廊，若外环再拥堵可切换第二绕行（`downtown → south-bypass → airport`），体现对路线可行性变化的适应能力。
+
+**时间表（小时制，0.5 = 30 分钟）**：
+- v1 绕行准备 0.0–0.25
+- 在 downtown 接 passenger1 0.25–0.5
+- 绕行段 1（downtown→ring-junction）0.5–1.5
+- 绕行段 2（ring-junction→airport）1.5–2.5
+- 在 airport 下客 2.5–2.75
+- v2 在 airport 待命接收/备援 0.0–2.75
+
+```json
+{
+  "achieved_goals": ["serve_all_passengers", "minimize_delays", "adapt_to_changes"],
+  "constraints_satisfied": ["vehicle_capacity", "passenger_deadlines", "route_availability"],
+  "schedule": [
+    {"task": "vehicle1 绕行路线预检与外环备选走廊装载（downtown）", "start": 0.0, "end": 0.25},
+    {"task": "vehicle1 在 downtown 接载 passenger1", "start": 0.25, "end": 0.5},
+    {"task": "绕行段1：downtown → ring-junction（避开封锁的 downtown-airport 直达线）", "start": 0.5, "end": 1.5},
+    {"task": "绕行段2：ring-junction → airport（含交通延误 buffer）", "start": 1.5, "end": 2.5},
+    {"task": "vehicle1 在 airport 下客 passenger1（满足 deadline 30）", "start": 2.5, "end": 2.75},
+    {"task": "vehicle2 在 airport 待命，备援后续 passenger2 请求", "start": 0.0, "end": 2.75}
+  ]
+}
+```
